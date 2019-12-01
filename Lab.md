@@ -595,7 +595,7 @@ In this exercise, you will extend the SPFx project from the previous exercise to
         }
         ```
 
-1. Update the web part to use mock data when running in the local workbench when the **Get Countries** button is pressed. Locate the `_onGetListItems` handler and update it's contents to the following code. This will first check if the web part is in the local workbench (`!this._isSharePoint`). if it is, it will return mock data. Otherwise it will run the previous code that will call the SharePoint REST API:
+1. Update the web part to use mock data when the **Get Countries** button is pressed while running in the local workbench. Locate the `_onGetListItems` handler and update it's contents to the following code. This will first check if the web part is in the local workbench (`!this._isSharePoint`). If it is, it will return mock data. Otherwise it will run the previous code that will call the SharePoint REST API:
 
     ```ts
     if (!this._isSharePoint) {
