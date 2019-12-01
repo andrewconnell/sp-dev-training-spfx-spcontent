@@ -381,7 +381,7 @@ In this exercise, you will extend the SPFx project from the previous exercise to
     }
     ```
 
-    These will all call different methods which you will add in the rest of this exercise. Each one will add, update or delete an item in the SharePoint list, and then call the existing `_getListItems()` method you created in the previous exercise followed by refreshing the web part by calling `render()` again.
+    These event handlers will call different methods which you will add in the remainder of this exercise. Each one will add, update, or delete an item in the SharePoint list, call the existing `_getListItems()` method you created in the previous exercise, and refresh the web part by calling `render()`.
 
 1. Add the following methods to the `SpFxHttpClientDemoWebPart` class to add a new item to the list:
 
