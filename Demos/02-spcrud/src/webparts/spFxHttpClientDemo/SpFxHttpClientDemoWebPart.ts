@@ -108,8 +108,11 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
   }
 
   private async _getItemEntityType(): Promise<string> {
+    const endpoint: string = this.context.pageContext.web.absoluteUrl + 
+      `/_api/web/lists/getbytitle('Countries')/items?$select=Id,Title`;
+
     const response = await this.context.spHttpClient.get(
-      this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items?$select=Id,Title`,
+      endpoint,
       SPHttpClient.configurations.v1);
 
     if (!response.ok) {
@@ -133,15 +136,22 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
     });
     /* eslint-enable @typescript-eslint/no-explicit-any */
 
+    const endpoint = this.context.pageContext.web.absoluteUrl + 
+      `/_api/web/lists/getbytitle('Countries')/items`;
+
     return this.context.spHttpClient.post(
-      this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items`,
+      endpoint,
       SPHttpClient.configurations.v1,
       request);
   }
 
   private async _updateListItem(): Promise<SPHttpClientResponse> {
+    const getEndpoint: string = this.context.pageContext.web.absoluteUrl + 
+      `/_api/web/lists/getbytitle('Countries')/items?` +
+      `$select=Id,Title&$filter=Title eq 'United States'`;
+
     const getResponse = await this.context.spHttpClient.get(
-      this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items?$select=Id,Title&$filter=Title eq 'United States'`,
+      getEndpoint,
       SPHttpClient.configurations.v1);
 
     if (!getResponse.ok) {
@@ -162,15 +172,22 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
     /* eslint-enable @typescript-eslint/no-explicit-any */
     request.body = JSON.stringify(listItem);
 
+    const postEndpoint: string = this.context.pageContext.web.absoluteUrl + 
+      `/_api/web/lists/getbytitle('Countries')/items(${listItem.Id})`;
+
     return this.context.spHttpClient.post(
-      this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items(${listItem.Id})`,
+      postEndpoint,
       SPHttpClient.configurations.v1,
       request);
   }
 
   private async _deleteListItem(): Promise<SPHttpClientResponse> {
+    const getEndpoint = this.context.pageContext.web.absoluteUrl + 
+      `/_api/web/lists/getbytitle('Countries')/items?` +
+      `$select=Id,Title&$orderby=ID desc&$top=1`;
+
     const getResponse = await this.context.spHttpClient.get(
-      this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items?$select=Id,Title&$orderby=ID desc&$top=1`,
+      getEndpoint,
       SPHttpClient.configurations.v1);
 
     if (!getResponse.ok) {
@@ -191,8 +208,11 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
     /* eslint-enable @typescript-eslint/no-explicit-any */
     request.body = JSON.stringify(listItem);
 
+    const postEndpoint = this.context.pageContext.web.absoluteUrl + 
+      `/_api/web/lists/getbytitle('Countries')/items(${listItem.Id})`;
+
     return this.context.spHttpClient.post(
-      this.context.pageContext.web.absoluteUrl + `/_api/web/lists/getbytitle('Countries')/items(${listItem.Id})`,
+      postEndpoint,
       SPHttpClient.configurations.v1,
       request);
   }
