@@ -198,7 +198,6 @@ export default class SpFxHttpClientDemoWebPart extends BaseClientSideWebPart<ISp
     const responseJson = await getResponse.json();
     const listItem: ICountryListItem = responseJson.value[0];
 
-    listItem.Title = 'USA';
     /* eslint-disable @typescript-eslint/no-explicit-any */
     const request: any = {};
     request.headers = {
